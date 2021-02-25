@@ -34,7 +34,12 @@ let data = [
 
 // selectors
 const addTodoList = document.getElementById("addTodoList");
-const parent = document.getElementById("parent");
+const todoList = document.getElementById("todoList");
+const onProgress = document.getElementById("onProgress");
+const test = document.getElementById("test");
+const done = document.getElementById("done");
+
+
 
 function render() {
 
@@ -45,7 +50,15 @@ function render() {
         const card = document.createElement("div");
         card.className = "card mt-2";
         card.style.width = "100%";
-        parent.appendChild(card);
+        if (data[i].category === 'todoList') {
+            todoList.appendChild(card);
+        } else if (data[i].category === 'onProgress') {
+            onProgress.appendChild(card);
+        } else if (data[i].category === 'test') {
+            test.appendChild(card);
+        } else if (data[i].category === 'done') {
+            done.appendChild(card);
+        }
 
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
@@ -80,4 +93,6 @@ function render() {
         buttonDiv.appendChild(buttonDelete);
     }
 }
+
 render()
+
