@@ -33,11 +33,49 @@ let data = [
 ];
 
 // selectors
-const parent = document.getElementById("parent");
 const addTodoList = document.getElementById("addTodoList");
+const todoList = document.getElementById("todoList");
+const onProgress = document.getElementById("onProgress");
+const test = document.getElementById("test");
+const done = document.getElementById("done");
 const formInput = document.getElementById("form-input");
 const buttonTodoList = document.getElementById("addTodoList");
+buttonTodoList.addEventListener("click", add);
 
+
+
+function add(e) {
+
+    // conditional untuk cek darimana category
+    let category = '';
+    if (e.target.id === 'addTodoList') {
+        category = 'todoList';
+    } else if (e.target.id === 'addOnProgress') {
+        category = 'onProgress';
+    } else if (e.target.id === 'addTest') {
+        category = 'test';
+    } else if (e.target.id === 'addDone') {
+        category = 'done';
+    }
+
+    // ambil date now
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    let obj = {
+        title: formInput.value,
+        category: category,
+        tanggal: today
+    }
+    data.push(obj);
+    console.log(data)
+
+    render()
+}
 
 
 function render() {
@@ -49,7 +87,15 @@ function render() {
         const card = document.createElement("div");
         card.className = "card mt-2";
         card.style.width = "100%";
-        parent.appendChild(card);
+        if (data[i].category === 'todoList') {
+            todoList.appendChild(card);
+        } else if (data[i].category === 'onProgress') {
+            onProgress.appendChild(card);
+        } else if (data[i].category === 'test') {
+            test.appendChild(card);
+        } else if (data[i].category === 'done') {
+            done.appendChild(card);
+        }
 
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
@@ -84,4 +130,6 @@ function render() {
         buttonDiv.appendChild(buttonDelete);
     }
 }
+
 render()
+
