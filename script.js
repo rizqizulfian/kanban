@@ -41,48 +41,62 @@ const done = document.getElementById("done");
 const formInput = document.getElementById("form-input");
 const buttonTodoList = document.getElementById("addTodoList");
 buttonTodoList.addEventListener("click", add);
+const buttonOnProgress = document.getElementById("addOnProgress");
+buttonOnProgress.addEventListener("click", add);
+const buttonTest = document.getElementById("addTest");
+buttonTest.addEventListener("click", add);
+const buttonDone = document.getElementById("addDone");
+buttonDone.addEventListener("click", add);
 
 
 
 function add(e) {
-
-    // conditional untuk cek darimana category
-    let category = '';
-    if (e.target.id === 'addTodoList') {
-        category = 'todoList';
-    } else if (e.target.id === 'addOnProgress') {
-        category = 'onProgress';
-    } else if (e.target.id === 'addTest') {
-        category = 'test';
-    } else if (e.target.id === 'addDone') {
-        category = 'done';
+    if (!formInput.value) {
+        alert("Input Tidak Boleh Kosong!");
+    } else {
+        event.preventDefault();
+        // conditional untuk cek darimana category
+        let category = '';
+        if (e.target.id === 'addTodoList') {
+            category = 'todoList';
+        } else if (e.target.id === 'addOnProgress') {
+            category = 'onProgress';
+        } else if (e.target.id === 'addTest') {
+            category = 'test';
+        } else if (e.target.id === 'addDone') {
+            category = 'done';
+        }
+    
+        // ambil date now
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+    
+        today = mm + '/' + dd + '/' + yyyy;
+    
+        let obj = {
+            title: formInput.value,
+            category: category,
+            tanggal: today
+        }
+        data.push(obj);
+        // reset();
+        render()
+        formInput.value = ""
     }
-
-    // ambil date now
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
-
-    let obj = {
-        title: formInput.value,
-        category: category,
-        tanggal: today
-    }
-    data.push(obj);
-    console.log(data)
-
-    render()
 }
-
 
 function render() {
 
-    // put all task to html
-    for (let i = 0; i < data.length; i++) {
+    todoList.innerHTML = ``
+    onProgress.innerHTML = ``
+    test.innerHTML = ``
+    done.innerHTML = ``
 
+    // put all task to html
+
+    for (let i = 0; i < data.length; i++) {
         // create div
         const card = document.createElement("div");
         card.className = "card mt-2";
