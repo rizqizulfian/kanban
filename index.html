@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./img/favicon.png" type="image/gif" sizes="16x16">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="padding-left: 200px;">
-            <img src="./img/kanban-logo.png" alt="" width="30" height="30" class="d-inline-block align-top">
-            KanbanTool
-        </a>
+            <a class="navbar-brand" href="#" style="padding-left: 200px;">
+                <img src="./img/kanban-logo.png" alt="" width="30" height="30" class="d-inline-block align-top">
+                KanbanTool
+            </a>
         </div>
     </nav>
 
@@ -29,17 +30,19 @@
                 <input type="text" class="form-input-text col-12 form-control mb-3" placeholder="Type new task here...">
             </div>
             <div class="todo-container col-3">
-                <div class="border border-primary m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded">
+                <div id="parent" class="border border-primary m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded">
                     <!-- <button type="button" class="btn btn-primary button-add">Add Todo List</button> -->
                     <h1 class="text-center fs-3">Todo List</h1>
-                    <button type="button" class="btn btn-primary button-add">Add Todo List</button>
-                    <div class="card mt-2" style="width: 100%;">
+                    <button id="addTodoList" type="button" class="btn btn-primary button-add">Add Todo List</button>
+                    <!-- <div class="card mt-2" style="width: 100%;">
                         <div class="card-body">
                             <h5 class="card-title">Membuat Kanban</h5>
                             <p class="card-text mt-1">25-02-2021</p>
                             <div style="text-align: center;">
-                                <button class="btn btn-outline-primary" style="width: 45%;">Edit</button>
-                                <button class="btn btn-outline-danger" style="width: 45%;">Delete</button>
+                                <button id="editTodoList" class="btn btn-outline-primary"
+                                    style="width: 45%;">Edit</button>
+                                <button id="deleteTodoList" class="btn btn-outline-danger"
+                                    style="width: 45%;">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -52,17 +55,17 @@
                                 <button class="btn btn-outline-danger" style="width: 45%;">Delete</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="onprogress-container col-3">
-                <div class="border border-danger m-1 p-1 rounded"> 
+                <div class="border border-danger m-1 p-1 rounded">
                     <button type="button" class="btn btn-danger button-add">Add Progress</button>
                     <h1 class="text-center fs-3">On Progress</h1>
                 </div>
             </div>
             <div class="test-container col-3">
-                <div class="border border-warning m-1 p-1 rounded"> 
+                <div class="border border-warning m-1 p-1 rounded">
                     <button type="button" class="btn btn-warning button-add">Add Test</button>
                     <h1 class="text-center fs-3">Test</h1>
                 </div>
@@ -76,6 +79,7 @@
         </div>
 
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
