@@ -41,11 +41,17 @@ const done = document.getElementById("done");
 const formInput = document.getElementById("form-input");
 const buttonTodoList = document.getElementById("addTodoList");
 buttonTodoList.addEventListener("click", add);
+const buttonOnProgress = document.getElementById("addOnProgress");
+buttonOnProgress.addEventListener("click", add);
+const buttonTest = document.getElementById("addTest");
+buttonTest.addEventListener("click", add);
+const buttonDone = document.getElementById("addDone");
+buttonDone.addEventListener("click", add);
 
 
 
 function add(e) {
-
+    event.preventDefault();
     // conditional untuk cek darimana category
     let category = '';
     if (e.target.id === 'addTodoList') {
@@ -72,13 +78,29 @@ function add(e) {
         tanggal: today
     }
     data.push(obj);
-    console.log(data)
-
+    reset();
     render()
 }
 
+function reset() {
+
+    todoList.innerHTML = `<h1 class="text-center fs-3">Todo List</h1>
+    <button id="addTodoList" type="button" class="btn btn-primary button-add">Add Todo List</button>`
+
+    onProgress.innerHTML = `<h1 class="text-center fs-3">On Progress</h1>
+<button id="addOnProgress" type="button" class="btn btn-danger button-add">Add Progress</button>`
+
+    test.innerHTML = `<h1 class="text-center fs-3">Test</h1>
+<button id="addTest" type="button" class="btn btn-warning button-add">Add Test</button>`
+
+    done.innerHTML = `<h1 class="text-center fs-3">Done</h1>
+<button id="addDone" type="button" class="btn btn-success button-add">Add Done</button>`
+
+}
 
 function render() {
+
+
 
     // put all task to html
     for (let i = 0; i < data.length; i++) {
