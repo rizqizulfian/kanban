@@ -48,7 +48,6 @@ function isValidate(title) {
   return true;
 }
 
-
 function addTodo(event) {
 
   if (formTodo.value !== "") {
@@ -83,15 +82,20 @@ function addProgress(event) {
   if (formProgress.value !== "") {
 
     event.preventDefault();
-    let obj = {
-      title: formProgress.value,
-      category: "onProgress",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formProgress.value = "";
-    alert(`${obj.title} added successfully`)
+
+    if (isValidate(formProgress.value)) {
+      let obj = {
+        title: formProgress.value,
+        category: "onProgress",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formProgress.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -105,15 +109,20 @@ buttonOnAddTest.addEventListener("click", addTest);
 function addTest(event) {
   if (formTest.value !== "") {
     event.preventDefault();
-    let obj = {
-      title: formTest.value,
-      category: "test",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formTest.value = "";
-    alert(`${obj.title} added successfully`)
+
+    if (isValidate(formTest.value)) {
+      let obj = {
+        title: formTest.value,
+        category: "test",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formTest.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -127,15 +136,19 @@ buttonAddDone.addEventListener("click", addDone);
 function addDone(event) {
   if (formDone.value !== "") {
     event.preventDefault();
-    let obj = {
-      title: formDone.value,
-      category: "done",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formDone.value = "";
-    alert(`${obj.title} added successfully`)
+    if (isValidate(formDone)) {
+      let obj = {
+        title: formDone.value,
+        category: "done",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formDone.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }    
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -225,14 +238,18 @@ function deleteTodo(e) {
   if (konfirmasi) {
     e.preventDefault();
 
-    const parent = e.target.parentNode.parentNode.parentNode;
-    const child = e.target.parentNode.parentNode;
-
-    console.log(parent);
-    parent.removeChild(child);
+    const judul = e.target.parentNode.previousSibling.previousSibling.innerText;
+    let index = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].title === judul) {
+        index = i;
+      }
+    }
+    data.splice(index, 1);
   }
-}
 
+  render();
+}
 
 // Function Edit
 function editTodo(e) {
@@ -251,7 +268,3 @@ function editTodo(e) {
   console.log(data);
   render();
 }
-
-
-
-
