@@ -48,7 +48,6 @@ function isValidate(title) {
   return true;
 }
 
-
 function addTodo(event) {
 
   if (formTodo.value !== "") {
@@ -83,15 +82,20 @@ function addProgress(event) {
   if (formProgress.value !== "") {
 
     event.preventDefault();
-    let obj = {
-      title: formProgress.value,
-      category: "onProgress",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formProgress.value = "";
-    alert(`${obj.title} added successfully`)
+
+    if (isValidate(formProgress.value)) {
+      let obj = {
+        title: formProgress.value,
+        category: "onProgress",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formProgress.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -105,15 +109,20 @@ buttonOnAddTest.addEventListener("click", addTest);
 function addTest(event) {
   if (formTest.value !== "") {
     event.preventDefault();
-    let obj = {
-      title: formTest.value,
-      category: "test",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formTest.value = "";
-    alert(`${obj.title} added successfully`)
+
+    if (isValidate(formTest.value)) {
+      let obj = {
+        title: formTest.value,
+        category: "test",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formTest.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -127,15 +136,19 @@ buttonAddDone.addEventListener("click", addDone);
 function addDone(event) {
   if (formDone.value !== "") {
     event.preventDefault();
-    let obj = {
-      title: formDone.value,
-      category: "done",
-      tanggal: tanggal(),
-    };
-    data.push(obj);
-    render();
-    formDone.value = "";
-    alert(`${obj.title} added successfully`)
+    if (isValidate(formDone.value)) {
+      let obj = {
+        title: formDone.value,
+        category: "done",
+        tanggal: tanggal(),
+      };
+      data.push(obj);
+      render();
+      formDone.value = "";
+      alert(`${obj.title} added successfully`)
+    } else {
+      alert('title already exists');
+    }    
   } else {
     alert("The input cannot be empty. OK?");
   }
@@ -240,13 +253,12 @@ function deleteTodo(e) {
 }
 
 
-
 // Function Edit
 function editTodo(e) {
-  event.preventDefault();
+  e.preventDefault();
 
   const judul = e.target.parentNode.previousSibling.previousSibling.innerText;
-  let newValue = prompt("Masukan title baru", "Belum diisi");
+  let newValue = prompt("Masukan title baru", judul);
   console.log(newValue)
 
   for (let i = 0; i < data.length; i++) {
@@ -273,9 +285,6 @@ for (let i = 0; i < listItem.length; i++) {
     })
 
     item.addEventListener('dragstart', function(e) {
-        // console.log(`dragstart`);
-        // console.log(e, "1");
-        // console.log(e.target.children[0].children[0].innerText);
         dari = e.target.children[0].children[0].innerText
         console.log(dari);
         draggedItem = item
@@ -292,7 +301,7 @@ for (let i = 0; i < listItem.length; i++) {
     })
 }
 
-
+//FUNCTION DRAG
 for (let i = 0; i < lists.length; i++) {
     const list = lists[i]
 
@@ -303,8 +312,6 @@ for (let i = 0; i < lists.length; i++) {
 
     list.addEventListener('dragenter', function(e) {
         e.preventDefault()
-        // console.log(this);
-        // this.style.backgroundColor = 'rgba (0, 0, 0, 0.2)'
     })
 
     list.addEventListener('drop', function(e) {
