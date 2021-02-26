@@ -79,28 +79,26 @@ function add(e) {
     }
     data.push(obj);
     reset();
-    render()
+    render();
 }
 
 function reset() {
 
     todoList.innerHTML = `<h1 class="text-center fs-3">Todo List</h1>
-    <button id="addTodoList" type="button" class="btn btn-primary button-add">Add Todo List</button>`
+                         <button id="addTodoList" type="button" class="btn btn-primary button-add">Add Todo List</button>`
 
     onProgress.innerHTML = `<h1 class="text-center fs-3">On Progress</h1>
-<button id="addOnProgress" type="button" class="btn btn-danger button-add">Add Progress</button>`
+                            <button id="addOnProgress" type="button" class="btn btn-danger button-add">Add Progress</button>`
 
     test.innerHTML = `<h1 class="text-center fs-3">Test</h1>
-<button id="addTest" type="button" class="btn btn-warning button-add">Add Test</button>`
+                        <button id="addTest" type="button" class="btn btn-warning button-add">Add Test</button>`
 
     done.innerHTML = `<h1 class="text-center fs-3">Done</h1>
-<button id="addDone" type="button" class="btn btn-success button-add">Add Done</button>`
+                        <button id="addDone" type="button" class="btn btn-success button-add">Add Done</button>`
 
 }
 
 function render() {
-
-
 
     // put all task to html
     for (let i = 0; i < data.length; i++) {
