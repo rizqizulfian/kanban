@@ -30,65 +30,47 @@ let data = [
     category: "done",
     tanggal: "23-12-2020",
   },
-<<<<<<< HEAD
 ];
 
-// selectors
-const addTodoList = document.getElementById("addTodoList");
-const todoList = document.getElementById("todoList");
-const onProgress = document.getElementById("onProgress");
-const test = document.getElementById("test");
-const done = document.getElementById("done");
-const formInput = document.getElementById("form-input");
+// add todo list
+const formTodo = document.getElementById("formTodo");
 const buttonTodoList = document.getElementById("addTodoList");
-buttonTodoList.addEventListener("click", add);
-const buttonOnProgress = document.getElementById("addOnProgress");
-buttonOnProgress.addEventListener("click", add);
-const buttonTest = document.getElementById("addTest");
-buttonTest.addEventListener("click", add);
-const buttonDone = document.getElementById("addDone");
-buttonDone.addEventListener("click", add);
+buttonTodoList.addEventListener("click", addTodo);
+
+function isValidate(title) {
+
+  for (let i = 0; i < data.length; i++) {
+    let dataTitle = data[i].title;
+    if (dataTitle === title) {
+      return false;
+    }
+  }
+  return true;
+}
 
 
+function addTodo(event) {
 
-function add(e) {
-  event.preventDefault();
-  // conditional untuk cek darimana category
-  let category = '';
-  if (e.target.id === 'addTodoList') {
-    category = 'todoList';
-  } else if (e.target.id === 'addOnProgress') {
-    category = 'onProgress';
-  } else if (e.target.id === 'addTest') {
-    category = 'test';
-  } else if (e.target.id === 'addDone') {
-    category = 'done';
-=======
-  ];
+  if (formTodo.value !== "") {
+    // Menghandle jika inputannya string kosong
+    event.preventDefault();
 
-  // add todo list
-  const formTodo = document.getElementById("formTodo");
-  const buttonTodoList = document.getElementById("addTodoList");
-  buttonTodoList.addEventListener("click", addTodo);
-
-  function addTodo(event) {
-    if (formTodo.value !== "") {
-      // Menghandle jika inputannya string kosong
-      event.preventDefault();
+    if (isValidate(formTodo.value)) {
       let obj = {
         title: formTodo.value,
         category: "todoList",
         tanggal: tanggal(),
       };
-      data = [];
       data.push(obj);
       render();
       // Mengosongkan inputan setelah ditambahkan
       formTodo.value = "";
       alert(`${obj.title} added successfully`)
     } else {
-      alert("The input cannot be empty. OK?");
->>>>>>> 7381605e370062fa2f403a47e8207d8255966c32
+      alert('title already exists');
+    }
+  } else {
+    alert("The input cannot be empty. OK?");
   }
 }
 
@@ -99,13 +81,13 @@ buttonOnProgress.addEventListener("click", addProgress);
 
 function addProgress(event) {
   if (formProgress.value !== "") {
+
     event.preventDefault();
     let obj = {
       title: formProgress.value,
       category: "onProgress",
       tanggal: tanggal(),
     };
-    data = [];
     data.push(obj);
     render();
     formProgress.value = "";
@@ -128,7 +110,6 @@ function addTest(event) {
       category: "test",
       tanggal: tanggal(),
     };
-    data = [];
     data.push(obj);
     render();
     formTest.value = "";
@@ -151,7 +132,6 @@ function addDone(event) {
       category: "done",
       tanggal: tanggal(),
     };
-    data = [];
     data.push(obj);
     render();
     formDone.value = "";
@@ -174,6 +154,10 @@ function tanggal() {
 
 // Function Render
 function render() {
+  todoList.innerHTML = '';
+  onProgress.innerHTML = '';
+  test.innerHTML = '';
+  done.innerHTML = '';
   // put all task to html
   for (let i = 0; i < data.length; i++) {
     // create div
@@ -209,8 +193,8 @@ function render() {
     cardBody.appendChild(buttonDiv);
 
     const buttonEdit = document.createElement("button");
-    buttonEdit.className = "btn btn-outline-primary";
-    buttonEdit.id = "editTodoList";
+    buttonEdit.className = "btn btn-outline-primary editTodoList";
+    // buttonEdit.id = "editTodoList";
     buttonEdit.style.width = "45%";
     buttonEdit.innerText = "Edit";
     buttonDiv.appendChild(buttonEdit);
@@ -225,6 +209,12 @@ function render() {
   // DELETE
   const deleteList = document.querySelectorAll(".deleteTodoList");
   deleteList.forEach((dlt) => dlt.addEventListener("click", deleteTodo));
+
+  // EDIT
+  const editList = document.querySelectorAll(".editTodoList");
+  editList.forEach((dlt) => dlt.addEventListener("click", editTodo));
+
+
 }
 
 render();
@@ -237,6 +227,31 @@ function deleteTodo(e) {
 
     const parent = e.target.parentNode.parentNode.parentNode;
     const child = e.target.parentNode.parentNode;
+
+    console.log(parent);
     parent.removeChild(child);
   }
 }
+
+
+// Function Edit
+function editTodo(e) {
+  event.preventDefault();
+
+  const judul = e.target.parentNode.previousSibling.previousSibling.innerText;
+  let newValue = prompt("Masukan title baru", "Belum diisi");
+  console.log(newValue)
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].title === judul) {
+      data[i].title = newValue;
+      data[i].tanggal = tanggal()
+    }
+  }
+  console.log(data);
+  render();
+}
+
+
+
+
