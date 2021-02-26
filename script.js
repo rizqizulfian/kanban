@@ -136,7 +136,7 @@ buttonAddDone.addEventListener("click", addDone);
 function addDone(event) {
   if (formDone.value !== "") {
     event.preventDefault();
-    if (isValidate(formDone)) {
+    if (isValidate(formDone.value)) {
       let obj = {
         title: formDone.value,
         category: "done",
@@ -177,6 +177,7 @@ function render() {
     const card = document.createElement("div");
     card.className = "card mt-2";
     card.style.width = "100%";
+    card.setAttribute('draggable', true);
     if (data[i].category === "todoList") {
       todoList.appendChild(card);
     } else if (data[i].category === "onProgress") {
@@ -251,12 +252,13 @@ function deleteTodo(e) {
   render();
 }
 
+
 // Function Edit
 function editTodo(e) {
-  event.preventDefault();
+  e.preventDefault();
 
   const judul = e.target.parentNode.previousSibling.previousSibling.innerText;
-  let newValue = prompt("Masukan title baru", "Belum diisi");
+  let newValue = prompt("Masukan title baru", judul);
   console.log(newValue)
 
   for (let i = 0; i < data.length; i++) {
@@ -267,4 +269,62 @@ function editTodo(e) {
   }
   console.log(data);
   render();
+}
+
+const lists = document.querySelectorAll(".parent")
+const listItem = document.querySelectorAll(".card")
+
+let draggedItem = null
+let dari = null //Di isi dengan title
+
+for (let i = 0; i < listItem.length; i++) {
+    const item = listItem[i]
+
+    item.addEventListener('click', function(e) {
+       console.log("Masuk");
+    })
+
+    item.addEventListener('dragstart', function(e) {
+        dari = e.target.children[0].children[0].innerText
+        console.log(dari);
+        draggedItem = item
+        setTimeout(function () {
+            item.style.display = 'none'
+        }, 0)
+    })
+
+    item.addEventListener('dragend', function() {
+        setTimeout(function () {
+            draggedItem.style.removeProperty("display")
+            draggedItem = null
+        }, 0)
+    })
+}
+
+//FUNCTION DRAG
+for (let i = 0; i < lists.length; i++) {
+    const list = lists[i]
+
+    list.addEventListener('dragover', function(e) {
+        e.preventDefault()
+        console.log("1");
+    })
+
+    list.addEventListener('dragenter', function(e) {
+        e.preventDefault()
+    })
+
+    list.addEventListener('drop', function(e) {
+        e.preventDefault
+        console.log(dari);
+        console.log(e,"2");
+        let ke = e.target.parentElement.parentElement.parentElement.id
+        for (let j = 0; j < data.length; j++) {
+            if (data[j].title === dari) {
+                data[j].category = ke
+                render()
+                break
+            }
+        }
+    })
 }
