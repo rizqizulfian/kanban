@@ -225,13 +225,19 @@ function deleteTodo(e) {
   if (konfirmasi) {
     e.preventDefault();
 
-    const parent = e.target.parentNode.parentNode.parentNode;
-    const child = e.target.parentNode.parentNode;
-
-    console.log(parent);
-    parent.removeChild(child);
+    const judul = e.target.parentNode.previousSibling.previousSibling.innerText;
+    let index = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].title === judul) {
+        index = i;
+      }
+    }
+    data.splice(index, 1);
   }
+
+  render();
 }
+
 
 
 // Function Edit
