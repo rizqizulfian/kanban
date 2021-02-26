@@ -173,9 +173,12 @@ let data = [
       buttonDiv.style.textAlign = "center";
       cardBody.appendChild(buttonDiv);
   
+      //button edit
       const buttonEdit = document.createElement("button");
       buttonEdit.className = "btn btn-outline-primary";
       buttonEdit.id = "editTodoList";
+    //   buttonEdit.setAttribute('data-toggle',"modal");
+    //   buttonEdit.setAttribute('data-target','#exampleModal');
       buttonEdit.style.width = "45%";
       buttonEdit.innerText = "Edit";
       buttonDiv.appendChild(buttonEdit);
@@ -189,6 +192,10 @@ let data = [
     }
     // DELETE
     const deleteList = document.querySelectorAll(".deleteTodoList");
+    deleteList.forEach((dlt) => dlt.addEventListener("click", deleteTodo));
+
+    // EDIT
+    const editList = document.querySelectorAll(".editTodoList");
     deleteList.forEach((dlt) => dlt.addEventListener("click", deleteTodo));
   }
   
@@ -206,3 +213,21 @@ let data = [
     }
   }
   
+// Function Edit 
+function editTodo(e) { 
+    event.preventDefault(); 
+    const judul = e.target.parentNode.previousSibling.previousSibling.innerText; 
+    let newValue = prompt("Masukan title baru", "Belum diisi"); 
+    console.log(newValue) 
+    for (let i = 0; i < data.length; i++) { 
+        if (data[i].title === judul) { 
+            data[i].title = newValue; 
+            data[i].tanggal = tanggal() 
+            if (data[i].category === 'todoList') { 
+                todoList.innerHTML = `<h1 class="text-center fs-3">Todo List</h1> <input type="text" id="formTodo" class="form-input-text col-12 form-control mb-3" placeholder="Type new todo list..." /> <button id="addTodoList" type="button" class="btn btn-primary button-add"> Add Todo List </button>` 
+            } 
+        } 
+    } 
+    // console.log(data); 
+    render(); 
+} 
