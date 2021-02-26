@@ -1,126 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kanban</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="./img/favicon.png" type="image/gif" sizes="16x16" />
-    <!-- CSS only -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-      crossorigin="anonymous"
-    />
-  </head>
 
-  <body>
-    <nav class="navbar navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img
-            src="./img/kanban-logo.png"
-            alt=""
-            width="40"
-            height="40"
-            class="d-inline-block align-top"
-          />
-          <span class="title">KanbanTool</span>
-        </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanban</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="./img/favicon.png" type="image/gif" sizes="16x16" />
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./img/kanban-logo.png" alt="" width="40" height="40" class="d-inline-block align-top" />
+        <span class="title">KanbanTool</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Container -->
+  <div id="container" class="container mt-3">
+    <div class="row">
+      <div class="todo-container col-3">
+        <div id="todoListParent" class="border border-primary m-1 p-1 rounded shadow p-3 mb-5 bg-white">
+          <h1 class="text-center fs-3">Todo List</h1>
+          <input type="text" id="formTodo" class="form-input-text col-12 form-control mb-3"
+            placeholder="Type new todo list..." />
+          <button id="addTodoList" type="button" class="btn btn-primary button-add">
+            Add Todo List
+          </button>
+          <div id="todoList">
+
+          </div>
+        </div>
       </div>
-    </nav>
+      <div class="onprogress-container col-3">
+        <div id="onProgressParent" class="border border-danger m-1 p-1 rounded shadow p-3 mb-5 bg-white">
+          <h1 class="text-center fs-3">On Progress</h1>
+          <input type="text" id="formProgress" class="form-input-text col-12 form-control mb-3"
+            placeholder="Type new on progress..." />
+          <button id="addOnProgress" type="button" class="btn btn-danger button-add">
+            Add Progress
+          </button>
+          <div id="onProgress">
 
-    <!-- Container -->
-    <div class="container mt-3">
-      <div class="row">
-        <div class="todo-container col-3">
-          <div
-            id="todoList"
-            class="border border-primary m-1 p-1 rounded shadow p-3 mb-5 bg-white"
-          >
-            <h1 class="text-center fs-3">Todo List</h1>
-            <input
-              type="text"
-              id="formTodo"
-              class="form-input-text col-12 form-control mb-3"
-              placeholder="Type new todo list..."
-            />
-            <button
-              id="addTodoList"
-              type="button"
-              class="btn btn-primary button-add"
-            >
-              Add Todo List
-            </button>
           </div>
         </div>
-        <div class="onprogress-container col-3">
-          <div
-            id="onProgress"
-            class="border border-danger m-1 p-1 rounded shadow p-3 mb-5 bg-white"
-          >
-            <h1 class="text-center fs-3">On Progress</h1>
-            <input
-              type="text"
-              id="formProgress"
-              class="form-input-text col-12 form-control mb-3"
-              placeholder="Type new on progress..."
-            />
-            <button
-              id="addOnProgress"
-              type="button"
-              class="btn btn-danger button-add"
-            >
-              Add Progress
-            </button>
+      </div>
+      <div class="test-container col-3">
+        <div id="testParent" class="border border-warning m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded">
+          <h1 class="text-center fs-3">Test</h1>
+          <input type="text" id="formTest" class="form-input-text col-12 form-control mb-3"
+            placeholder="Type new test..." />
+          <button id="addTest" type="button" class="btn btn-warning button-add">
+            Add Test
+          </button>
+          <div id="test">
+
           </div>
+
         </div>
-        <div class="test-container col-3">
-          <div
-            id="test"
-            class="border border-warning m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded"
-          >
-            <h1 class="text-center fs-3">Test</h1>
-            <input
-              type="text"
-              id="formTest"
-              class="form-input-text col-12 form-control mb-3"
-              placeholder="Type new test..."
-            />
-            <button
-              id="addTest"
-              type="button"
-              class="btn btn-warning button-add"
-            >
-              Add Test
-            </button>
-          </div>
-        </div>
-        <div class="done-container col-3">
-          <div
-            id="done"
-            class="border border-success m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded"
-          >
-            <h1 class="text-center fs-3">Done</h1>
-            <input
-              type="text"
-              id="formDone"
-              class="form-input-text col-12 form-control mb-3"
-              placeholder="Type new done..."
-            />
-            <button
-              id="addDone"
-              type="button"
-              class="btn btn-success button-add"
-            >
-              Add Done
-            </button>
+      </div>
+      <div class="done-container col-3">
+        <div id="doneParent" class="border border-success m-1 p-1 rounded shadow p-3 mb-5 bg-white rounded">
+          <h1 class="text-center fs-3">Done</h1>
+          <input type="text" id="formDone" class="form-input-text col-12 form-control mb-3"
+            placeholder="Type new done..." />
+          <button id="addDone" type="button" class="btn btn-success button-add">
+            Add Done
+          </button>
+          <div id="done">
+
           </div>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
